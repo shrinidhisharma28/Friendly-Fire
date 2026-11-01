@@ -1,0 +1,104 @@
+.game-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:24px;
+
+}
+
+
+.game-title{
+
+    font-size:56px;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+
+.info-row{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:16px;
+
+    flex-wrap:wrap;
+
+}
+
+
+.info-badge{
+
+    padding:14px 24px;
+
+    border-radius:30px;
+
+    background:
+
+        rgba(
+
+            17,
+
+            24,
+
+            39,
+
+            0.22
+
+        );
+
+    backdrop-filter:blur(14px);
+
+    -webkit-backdrop-filter:blur(14px);
+
+    border:
+
+        1px solid rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            0.05
+
+        );
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}
+
+
+.info-badge .x{
+
+    color:#FF4D4D;
+
+    text-shadow:
+
+        0 0 8px #FF4D4D;
+
+}
+
+
+.info-badge .o{
+
+    color:#38BDF8;
+
+    text-shadow:
+
+        0 0 8px #38BDF8;
+
+}

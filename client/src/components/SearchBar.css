@@ -1,0 +1,33 @@
+.search-input{
+
+    width:400px;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    border:2px solid var(--border);
+
+    background:var(--card);
+
+    color:white;
+
+    font-size:16px;
+
+}
+
+
+.search-input::placeholder{
+
+    color:#94A3B8;
+
+}
+
+
+.search-input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+}

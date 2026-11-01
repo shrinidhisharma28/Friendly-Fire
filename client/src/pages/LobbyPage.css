@@ -1,0 +1,244 @@
+.lobby-container{
+
+    min-height:100vh;
+
+}
+
+
+.lobby-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:70px;
+
+}
+
+
+.lobby-title{
+
+    font-size:56px;
+
+    font-weight:800;
+
+    color:white;
+
+    text-align:center;
+
+    text-shadow:
+
+        0 0 20px rgba(
+
+            255,
+
+            107,
+
+            53,
+
+            0.18
+
+        );
+
+}
+
+
+.lobby-subtitle{
+
+    font-size:20px;
+
+    text-align:center;
+
+    color:
+
+        rgba(
+
+            255,
+
+            247,
+
+            237,
+
+            0.75
+
+        );
+
+}
+
+
+.search-wrapper{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:15px;
+
+    padding:0 20px;
+
+}
+
+
+.search-wrapper .input{
+
+    width:min(
+
+        420px,
+
+        100%
+
+    );
+
+}
+
+
+.games-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            auto-fit,
+
+            minmax(
+
+                280px,
+
+                1fr
+
+            )
+
+        );
+
+    gap:40px;
+
+    margin-top:60px;
+
+    align-items:start;
+
+    justify-items:center;
+
+}
+
+
+.empty-message{
+
+    margin-top:60px;
+
+    text-align:center;
+
+    color:
+
+        rgba(
+
+            255,
+
+            247,
+
+            237,
+
+            0.55
+
+        );
+
+}
+
+
+@media(max-width:768px){
+
+
+.lobby-header{
+
+
+margin-top:40px;
+
+
+}
+
+
+.lobby-title{
+
+
+font-size:42px;
+
+
+}
+
+
+.lobby-subtitle{
+
+
+font-size:17px;
+
+
+}
+
+
+.games-grid{
+
+
+grid-template-columns:
+
+1fr;
+
+
+gap:28px;
+
+
+margin-top:40px;
+
+
+}
+
+
+}
+
+
+@media(max-width:480px){
+
+
+.lobby-title{
+
+
+font-size:34px;
+
+
+}
+
+
+.lobby-subtitle{
+
+
+font-size:15px;
+
+
+}
+
+
+.search-wrapper{
+
+
+padding:0 10px;
+
+
+}
+
+
+.games-grid{
+
+
+gap:22px;
+
+
+}
+
+
+}

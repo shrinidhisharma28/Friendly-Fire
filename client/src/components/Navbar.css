@@ -1,0 +1,64 @@
+.navbar{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px 48px;
+
+    position:relative;
+
+    z-index:10;
+
+}
+
+
+.logo{
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:36px;
+
+    font-weight:700;
+
+}
+
+
+.user{
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:white;
+
+}
+
+
+@media(max-width:768px){
+
+    .navbar{
+
+        padding:20px;
+
+    }
+
+
+    .logo{
+
+        font-size:28px;
+
+    }
+
+
+    .user{
+
+        font-size:15px;
+
+    }
+
+}

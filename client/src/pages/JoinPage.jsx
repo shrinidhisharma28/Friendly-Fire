@@ -1,0 +1,154 @@
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
+import Button from '../components/Button';
+import Input from '../components/Input';
+import './JoinPage.css';
+import ColorBends from '../components/ColorBendsbg';
+
+
+function JoinPage(){
+
+    const [username,setUsername]=useState("");
+
+    const navigate=useNavigate();
+
+
+    function handleContinue(){
+
+        if(username.trim()==="") return;
+
+        sessionStorage.setItem(
+
+            "username",
+
+            username
+
+        );
+
+        navigate("/lobby");
+
+    }
+
+
+    return(
+
+        <>
+
+            <ColorBends/>
+
+
+            <div className="join-container">
+
+
+                <div className="join-content">
+
+
+                    <p className="join-label">
+
+                        MULTIPLAYER GAMING PLATFORM
+
+                    </p>
+
+                    <h1 className="join-title">
+
+                        Friendly Fire
+
+                    </h1>
+
+
+                    <p className="join-subtitle">
+
+                        Play • Compete • Have Fun
+
+                    </p>
+
+
+
+                    <p className="join-text">
+
+                        Choose a username to begin
+
+                    </p>
+
+
+
+                    <div className="join-input">
+
+
+                        <Input
+
+                            placeholder="Username"
+
+                            value={username}
+
+                            onChange={
+
+                                e=>
+
+                                setUsername(
+
+                                    e.target.value
+
+                                )
+
+                            }
+
+                            onKeyDown={
+
+                                e=>{
+
+                                    if(
+
+                                        e.key==="Enter"
+
+                                    ){
+
+                                        handleContinue();
+
+                                    }
+
+                                }
+
+                            }
+
+                        />
+
+
+                    </div>
+
+
+
+                    <Button
+
+                        onClick={handleContinue}
+
+                    >
+
+                        Continue
+
+                    </Button>
+
+
+
+                    <p className="join-footer">
+
+                        2 Games Available • React • Socket.io
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </>
+
+    );
+
+}
+
+
+export default JoinPage;
