@@ -1,537 +1,235 @@
-.game-card{
-
-    width:min(
-
-        310px,
-
-        90vw
-
-    );
-
-    height:420px;
-
+.game-card {
+    width: min(310px, 90vw);
+    height: 420px;
+    perspective: 1000px;
 }
 
-
-
-.card-inner{
-
-    width:100%;
-
-    height:100%;
-
-    position:relative;
-
-    transform-style:preserve-3d;
-
-    transition:
-
-        transform
-
-        .8s
-
-        cubic-bezier(
-
-            .4,
-
-            .2,
-
-            .2,
-
-            1
-
-        );
-
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-
-
-.flipped{
-
-    transform:rotateY(180deg);
-
+.flipped {
+    transform: rotateY(180deg);
 }
-
-
 
 .game-front,
-
-.game-back{
-
-    position:absolute;
-
-    width:100%;
-
-    height:100%;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    backface-visibility:hidden;
-
+.game-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    backface-visibility: hidden;
 }
 
-
-
-.game-front{
-
-    display:flex;
-
-    flex-direction:column;
-
-    background:
-
-        rgba(
-
-            17,
-
-            24,
-
-            39,
-
-            0.09
-
-        );
-
-    backdrop-filter:blur(18px);
-
-    -webkit-backdrop-filter:blur(18px);
-
-    border:
-
-        1px solid rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            0.04
-
-        );
-
-    color:white;
-
-    transition:
-
-        background .35s,
-
-        box-shadow .35s,
-
-        border-color .35s;
-
-}
-
-
-
-.game-front:hover{
-
-    background:
-
-        rgba(
-
-            17,
-
-            24,
-
-            39,
-
-            .42
-
-        );
-
-    border-color:
-
-        rgba(
-
-            255,
-
-            179,
-
-            71,
-
-            0.12
-
-        );
-
+/* === FRONT CARD — Uiverse.io inspired neon border style === */
+.game-front {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(145deg, #0f172a, #1e293b);
+    border: 1px solid rgba(249, 115, 22, 0.15);
+    color: white;
+    position: relative;
+    transition: box-shadow 0.35s, border-color 0.35s;
     box-shadow:
-
-        0 0 14px rgba(
-
-            255,
-
-            107,
-
-            53,
-
-            0.422
-
-        ),
-
-        0 0 28px rgba(
-
-            59,
-
-            130,
-
-            246,
-
-            0.06
-
-        );
-
+        0 0 0 1px rgba(249, 115, 22, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-
-
-.game-back{
-
-    transform:rotateY(180deg);
-
-    padding:28px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:18px;
-
-    text-align:center;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            #1E293B,
-
-            #111827
-
-        );
-
-    border:
-
-        1px solid rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            .06
-
-        );
-
+/* Neon circuit corner accents */
+.game-front::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(249,115,22,0.4) 0%, transparent 50%, rgba(59,130,246,0.3) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s;
 }
 
-
-
-.game-image{
-
-    height:58%;
-
-    padding:4px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:20px;
-
-    background:
-
-        rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            0.025
-
-        );
-
-    border:
-
-        1px solid rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            0.03
-
-        );
-
+.game-front:hover::before {
+    opacity: 1;
 }
 
-
-
-.game-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:contain;
-
-    border-radius:18px;
-
+.game-front:hover {
+    border-color: rgba(249, 115, 22, 0.35);
+    box-shadow:
+        0 0 20px rgba(249, 115, 22, 0.25),
+        0 0 40px rgba(249, 115, 22, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-
-
-.game-details{
-
-    height:42%;
-
-    padding:18px;
-
-    display:grid;
-
-    grid-template-rows:
-
-        auto
-
-        1fr
-
-        30px
-
-        auto;
-
+.game-back {
+    transform: rotateY(180deg);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.15);
 }
 
-
-
-.title-row{
-
-    display:flex;
-
-    height:35px;
-
-    justify-content:space-between;
-
-    align-items:center;
-
+/* === IMAGE AREA === */
+.game-image {
+    height: 58%;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(249, 115, 22, 0.08);
+    position: relative;
+    overflow: hidden;
 }
 
-
-
-.title-row h2{
-
-    font-size:20px;
-
-    font-weight:700;
-
+.game-image::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, rgba(15, 23, 42, 0.8));
+    pointer-events: none;
 }
 
-
-
-.players{
-
-    color:#CBD5E1;
-
-    font-size:15px;
-
+.game-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 4px 16px rgba(249, 115, 22, 0.2));
+    transition: transform 0.35s, filter 0.35s;
 }
 
-.players-row{
-
-    display:flex;
-
-    align-items:center;
-
-    height:20px;
-
+.game-front:hover .game-image img {
+    transform: scale(1.04);
+    filter: drop-shadow(0 6px 24px rgba(249, 115, 22, 0.4));
 }
 
-.button-row{
-
-    display:flex;
-
-    align-items:flex-end;
-
+/* === DETAILS AREA === */
+.game-details {
+    height: 42%;
+    padding: 16px 18px 18px;
+    display: grid;
+    grid-template-rows: auto 1fr 30px auto;
 }
 
-.info-btn{
-
-    width:36px;
-
-    height:36px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:
-
-        rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            .04
-
-        );
-
-    color:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    transition:.3s;
-
+.title-row {
+    display: flex;
+    height: 35px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-
-
-.info-btn:hover{
-
-    background:
-
-        rgba(
-
-            249,
-
-            115,
-
-            22,
-
-            .12
-
-        );
-
-    color:#F97316;
-
+.title-row h2 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: linear-gradient(90deg, #fff 60%, rgba(249,115,22,0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-
-
-.back-title{
-
-    font-size:34px;
-
-    font-weight:700;
-
+.players {
+    color: #94a3b8;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
-
-
-.back-description{
-
-    font-size:18px;
-
-    line-height:1.5;
-
-    color:#CBD5E1;
-
-    max-width:220px;
-
+.players-row {
+    display: flex;
+    align-items: center;
+    height: 20px;
 }
 
-
-
-.back-stats{
-
-    width:100%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
+.button-row {
+    display: flex;
+    align-items: flex-end;
 }
 
-
-
-.back-stats div{
-
-    padding:12px;
-
-    border-radius:12px;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            rgba(
-
-                249,
-
-                115,
-
-                22,
-
-                .12
-
-            ),
-
-            rgba(
-
-                59,
-
-                130,
-
-                246,
-
-                .08
-
-            )
-
-        );
-
-    border:
-
-        1px solid rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            .05
-
-        );
-
-    font-size:18px;
-
-    font-weight:600;
-
+.info-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 8px;
+    background: rgba(249, 115, 22, 0.05);
+    color: #94a3b8;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.25s;
 }
 
+.info-btn:hover {
+    background: rgba(249, 115, 22, 0.15);
+    border-color: rgba(249, 115, 22, 0.5);
+    color: #F97316;
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.3);
+}
 
+/* === BACK SIDE === */
+.back-title {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #F97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-.back-hint{
+.back-description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #94a3b8;
+    max-width: 220px;
+}
 
-    color:#3B82F6;
+.back-stats {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-    font-size:14px;
+.back-stats div {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(249, 115, 22, 0.07);
+    border: 1px solid rgba(249, 115, 22, 0.15);
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, border-color 0.2s;
+}
 
+.back-stats div:hover {
+    background: rgba(249, 115, 22, 0.14);
+    border-color: rgba(249, 115, 22, 0.35);
+}
+
+.back-hint {
+    color: #475569;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }

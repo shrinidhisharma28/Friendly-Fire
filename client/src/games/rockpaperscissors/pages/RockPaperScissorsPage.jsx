@@ -5,7 +5,7 @@ import socket from "../../../services/socket";
 import useGameSocket from "../../common/hooks/useGameSocket";
 
 import Loading from "../../../components/Loading";
-import ColorBends from "../../../components/ColorBendsbg";
+import ColorBends from "../../../components/ColorBends";
 
 import ScoreBoard from "../components/ScoreBoard";
 import HandDisplay from "../components/HandDisplay";
@@ -120,7 +120,7 @@ function RockPaperScissorsPage() {
     return (
 
         <>
-            <ColorBends />
+            <ColorBends colors={["#F97316"]} speed={0.4} intensity={1.5} noise={0} rotation={-55} autoRotate={-3} />
 
             <div className="rps-page">
 

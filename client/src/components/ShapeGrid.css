@@ -1,0 +1,51 @@
+.shape-grid-container {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.sg-shape {
+    border-radius: 2px;
+    transition: opacity 0.3s;
+}
+
+/* Circle */
+.sg-circle {
+    border: 1.5px solid var(--sg-color);
+    border-radius: 50%;
+    background: transparent;
+}
+
+/* Square */
+.sg-square {
+    border: 1.5px solid var(--sg-color);
+    background: transparent;
+}
+
+/* Triangle — CSS clip path */
+.sg-triangle {
+    background: transparent;
+    border-left: calc(var(--size, 12px) / 2) solid transparent;
+    border-right: calc(var(--size, 12px) / 2) solid transparent;
+    border-bottom: calc(var(--size, 12px) * 0.866) solid var(--sg-color);
+    width: 0 !important;
+    height: 0 !important;
+    border-radius: 0;
+}
+
+/* Cross / plus */
+.sg-cross {
+    background: var(--sg-color);
+    clip-path: polygon(
+        37% 0%, 63% 0%,
+        63% 37%, 100% 37%,
+        100% 63%, 63% 63%,
+        63% 100%, 37% 100%,
+        37% 63%, 0% 63%,
+        0% 37%, 37% 37%
+    );
+}
