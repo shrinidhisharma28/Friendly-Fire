@@ -10,8 +10,6 @@ import GameControls from '../../common/components/GameControls';
 import Loading from '../../../components/Loading';
 
 import Board from '../components/Board';
-import ColorBends from '../../../components/ColorBends';
-
 
 function Connect4Page() {
 
@@ -123,11 +121,6 @@ function Connect4Page() {
     return (
 
         <>
-            <ColorBends
-                colors={["#F97316"]}
-                intensity={0.9}
-                noise={0}
-            />
 
             <GameInfo
 

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import ColorBends from '../components/ColorBends';
 import './JoinPage.css';
 
 function JoinPage() {
@@ -12,12 +11,12 @@ function JoinPage() {
     function handleContinue() {
         if (username.trim() === "") return;
         sessionStorage.setItem("username", username);
-        navigate("/");
+        navigate("/lobby");
     }
 
     return (
         <>
-            <ColorBends colors={["#F97316"]} speed={0.4} intensity={1.5} noise={0} rotation={-55} autoRotate={-3} />
+            
             <div className="join-container">
                 <div className="join-content">
                     <p className="join-label">MULTIPLAYER GAMING PLATFORM</p>

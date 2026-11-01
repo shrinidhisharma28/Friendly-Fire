@@ -1,239 +1,173 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
 
-import socket from "../../../services/socket";
-import useGameSocket from "../../common/hooks/useGameSocket";
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import Loading from "../../../components/Loading";
-import ColorBends from "../../../components/ColorBends";
+import socket from '../../../services/socket';
+import useGameSocket from '../../common/hooks/useGameSocket';
 
-import ScoreBoard from "../components/ScoreBoard";
-import HandDisplay from "../components/HandDisplay";
-import ChoiceSelector from "../components/ChoiceSelector";
-import RoundResult from "../components/RoundResult";
+import Loading from '../../../components/Loading';
 
-import GameControls from "../../common/components/GameControls";
+import GameInfo from '../../common/components/GameInfo';
+import GameControls from '../../common/components/GameControls';
 
-import "./RockPaperScissors.css";
+import ScoreBoard from '../components/ScoreBoard';
+import HandDisplay from '../components/HandDisplay';
+import ChoiceSelector from '../components/ChoiceSelector';
+import RoundResult from '../components/RoundResult';
+
+import './RockPaperScissors.css';
 
 function RockPaperScissorsPage() {
-
     const { roomId } = useParams();
 
-    const {
-        room,
-        leaveRoom
-    } = useGameSocket(roomId);
+    const { room, leaveRoom } = useGameSocket(roomId);
 
-    const [
-        selectedMove,
-        setSelectedMove
-    ] = useState(null);
+    const [selectedMove, setSelectedMove] = useState(null);
 
-    if (!room || !room.gameState) {
-
+    if (!room || !room.gameState || !socket.id) {
         return <Loading />;
+    }
 
+    if (
+        !Array.isArray(room.players) ||
+        room.players.length !== 2
+    ) {
+        return <Loading />;
     }
 
     const game = room.gameState;
-
     const myId = socket.id;
 
-    const opponent =
-        room.players.find(
-            player => player.socketId !== myId
-        );
+    // Keep the same player order on both clients.
+    const player1 = room.players[0];
+    const player2 = room.players[1];
 
-    const isHost =
-        room.hostId === myId;
+    const isHost = room.hostId === myId;
 
     const canRestartGame =
         room.players.length >= room.minPlayers;
 
     function selectMove(move) {
-
         if (game.locked[myId]) return;
 
         setSelectedMove(move);
 
-        socket.emit(
-            "make-move",
-            {
-                roomId,
-                payload: {
-                    action: "select",
-                    move
-                }
+        socket.emit('make-move', {
+            roomId,
+            payload: {
+                action: 'select',
+                move
             }
-        );
-
+        });
     }
 
     function lockChoice() {
-
-        socket.emit(
-            "make-move",
-            {
-                roomId,
-                payload: {
-                    action: "lock"
-                }
+        socket.emit('make-move', {
+            roomId,
+            payload: {
+                action: 'lock'
             }
-        );
-
+        });
     }
 
     function continueGame() {
-
-        socket.emit(
-            "make-move",
-            {
-                roomId,
-                payload: {
-                    action: "continue"
-                }
+        socket.emit('make-move', {
+            roomId,
+            payload: {
+                action: 'continue'
             }
-        );
+        });
 
         setSelectedMove(null);
-
     }
 
     function restartGame() {
-
-        socket.emit(
-            "restart-game",
-            {
-                roomId
-            }
-        );
-
+        socket.emit('restart-game', { roomId });
         setSelectedMove(null);
-
     }
 
     const revealed =
-        game.phase === "revealing" ||
-        game.phase === "game_over";
+        game.phase === 'revealing' ||
+        game.phase === 'game_over';
+
+    const isGameOver = game.phase === 'game_over';
 
     return (
+        <div className="rps-page">
+            <div className="rps-container">
 
-        <>
-            <ColorBends colors={["#F97316"]} speed={0.4} intensity={1.5} noise={0} rotation={-55} autoRotate={-3} />
+                <GameInfo title="Rock Paper Scissors" />
 
-            <div className="rps-page">
+                <ScoreBoard
+                    players={room.players}
+                    scores={game.scores}
+                    round={game.round}
+                />
 
-                <div className="rps-container">
+                <section className="battle-section">
 
-                    <ScoreBoard
-                        players={room.players}
-                        scores={game.scores}
-                        round={game.round}
+                    <HandDisplay
+                        username={player1.username}
+                        move={game.choices[player1.socketId]}
+                        revealed={revealed}
                     />
 
-                    <section className="battle-section">
+                    <div className="battle-center">
+                        <h1>VS</h1>
+                    </div>
 
-                        <HandDisplay
-                            username={room.players[0].username}
-                            move={
-                                game.choices[
-                                    room.players[0].socketId
-                                ]
-                            }
-                            revealed={revealed}
+                    <HandDisplay
+                        username={player2.username}
+                        move={game.choices[player2.socketId]}
+                        revealed={revealed}
+                    />
+
+                </section>
+
+                {game.phase === 'choosing' && (
+                    <section className="selector-section">
+                        <ChoiceSelector
+                            selectedMove={selectedMove}
+                            locked={game.locked[myId]}
+                            onSelect={selectMove}
+                            onLock={lockChoice}
                         />
-
-                        <div className="battle-center">
-
-                            <h1>VS</h1>
-
-                        </div>
-
-                        <HandDisplay
-                            username={opponent.username}
-                            move={
-                                game.choices[
-                                    opponent.socketId
-                                ]
-                            }
-                            revealed={revealed}
-                        />
-
                     </section>
+                )}
 
-                    {
-
-                        game.phase === "choosing" &&
-
-                        <section className="selector-section">
-
-                            <ChoiceSelector
-                                selectedMove={selectedMove}
-                                locked={game.locked[myId]}
-                                onSelect={selectMove}
-                                onLock={lockChoice}
-                            />
-
-                        </section>
-
-                    }
-
-                    {
-
-                        game.phase !== "choosing" &&
-
-                        <section className="result-section">
-
-                            <RoundResult
-                                room={room}
-                                socketId={myId}
-                            />
-
-                        </section>
-
-                    }
-
-                    {
-
-                        game.phase === "revealing" &&
-                        isHost &&
-
-                        <div className="action-row">
-
-                            <button
-                                className="continue-btn"
-                                onClick={continueGame}
-                            >
-                                Next Round
-                            </button>
-
-                        </div>
-
-                    }
-
-                    {
-
-                        game.phase === "game_over" &&
-
-                        <GameControls
-                            canRestart={isHost}
-                            canRestartGame={canRestartGame}
-                            showRestart={true}
-                            onRestart={restartGame}
-                            onLeave={leaveRoom}
+                {game.phase !== 'choosing' && (
+                    <section className="result-section">
+                        <RoundResult
+                            room={room}
+                            socketId={myId}
                         />
+                    </section>
+                )}
 
-                    }
+                {game.phase === 'revealing' && isHost && (
+                    <div className="action-row">
+                        <button
+                            className="continue-btn"
+                            onClick={continueGame}
+                        >
+                            Next Round
+                        </button>
+                    </div>
+                )}
 
-                </div>
+                {/* Leave is always available.
+                    Restart is shown only after game over. */}
+                <GameControls
+                    canRestart={isHost}
+                    canRestartGame={canRestartGame}
+                    showRestart={isGameOver}
+                    onRestart={restartGame}
+                    onLeave={leaveRoom}
+                />
 
             </div>
-
-        </>
-
+        </div>
     );
-
 }
 
 export default RockPaperScissorsPage;

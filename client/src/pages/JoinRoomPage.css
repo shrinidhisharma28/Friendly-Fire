@@ -1,0 +1,197 @@
+
+/* =========================================
+   JOIN ROOM PAGE
+========================================= */
+
+.page.join-room-page {
+    width: 100%;
+    max-width: none;
+
+    min-height: calc(100vh - 90px);
+
+    margin: 0;
+    padding: 35px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    position: relative;
+    z-index: 2;
+
+    box-sizing: border-box;
+}
+
+/* =========================================
+   JOIN ROOM PANEL
+========================================= */
+
+.join-room-panel {
+    width: min(100%, 430px);
+
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 26px;
+
+    background: rgba(17, 24, 39, 0.3);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(249, 115, 22, 0.04);
+
+    box-sizing: border-box;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.join-room-header {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 5px;
+
+    text-align: center;
+}
+
+.join-room-title {
+    margin: 0;
+
+    color: #fff7ed;
+
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.join-room-subtitle {
+    margin: 0;
+
+    color: rgba(255, 247, 237, 0.7);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.join-room-form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 12px;
+}
+
+/* Override global Input dimensions */
+.join-room-form .input {
+    width: 100%;
+    max-width: none;
+
+    min-height: 48px;
+
+    padding: 13px 16px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+/* Override global Button width */
+.join-room-form .btn {
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 12px 18px;
+
+    border-radius: 11px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 768px) {
+    .page.join-room-page {
+        min-height: calc(100vh - 65px);
+        padding: 25px 20px;
+    }
+
+    .join-room-panel {
+        padding: 28px;
+        gap: 22px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+    .page.join-room-page {
+        min-height: calc(100dvh - 55px);
+
+        padding: 20px 16px;
+
+        align-items: flex-start;
+    }
+
+    .join-room-panel {
+        width: 100%;
+
+        padding: 24px 18px;
+
+        gap: 20px;
+
+        border-radius: 20px;
+    }
+
+    .join-room-title {
+        font-size: 29px;
+    }
+
+    .join-room-subtitle {
+        font-size: 13px;
+    }
+
+    .join-room-form {
+        gap: 10px;
+    }
+
+    .join-room-form .input {
+        min-height: 46px;
+        font-size: 13px;
+    }
+
+    .join-room-form .btn {
+        min-height: 43px;
+        font-size: 13px;
+    }
+}

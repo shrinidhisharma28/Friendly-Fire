@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import socket from '../../../services/socket';
-import ColorBends from '../../../components/ColorBends';
 import Board from '../components/Board';
 import GameInfo from '../../common/components/GameInfo';
 import GameStatus from '../../common/components/GameStatus';
@@ -92,11 +91,6 @@ function TicTacToePage() {
 
     return (
         <>
-        <ColorBends
-            colors={["#F97316"]}
-            intensity={0.9}
-            noise={0}
-        />
         <div className="ttt-page">
 
             <GameInfo

@@ -1,64 +1,70 @@
-.navbar{
 
-    width:100%;
+/* =========================================
+   NAVBAR
+========================================= */
 
-    display:flex;
+.navbar {
+    width: 100%;
 
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    align-items:center;
+    padding: 14px 36px;
 
-    padding:28px 48px;
+    position: relative;
+    z-index: 10;
 
-    position:relative;
-
-    z-index:10;
-
+    box-sizing: border-box;
 }
 
+/* Friendly Fire branding */
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
 
-.logo{
-
-    font-family:'Orbitron',sans-serif;
-
-    font-size:36px;
-
-    font-weight:700;
-
+    white-space: nowrap;
 }
 
+/* User profile */
+.user {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
 
-.user{
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:white;
-
+    white-space: nowrap;
 }
 
+/* =========================================
+   TABLET AND MOBILE
+========================================= */
 
-@media(max-width:768px){
-
-    .navbar{
-
-        padding:20px;
-
+@media (max-width: 768px) {
+    .navbar {
+        padding: 14px 20px;
     }
 
-
-    .logo{
-
-        font-size:28px;
-
+    .logo {
+        font-size: 26px;
     }
 
+    .user {
+        font-size: 14px;
+    }
+}
 
-    .user{
-
-        font-size:15px;
-
+@media (max-width: 480px) {
+    .navbar {
+        padding: 12px 14px;
     }
 
+    .logo {
+        font-size: 21px;
+    }
+
+    .user {
+        font-size: 12px;
+    }
 }

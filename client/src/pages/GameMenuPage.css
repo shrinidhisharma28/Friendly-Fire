@@ -1,335 +1,312 @@
-.panel{
 
+/* =========================================
+   GAME MENU PAGE
+========================================= */
 
-background:
+.page.game-menu-page {
+    width: 100%;
+    max-width: 1200px;
 
+    margin: auto;
+    padding: 24px 40px 40px;
 
-rgba(
+    position: relative;
+    z-index: 2;
 
-17,
-
-24,
-
-39,
-
-0.16
-
-);
-
-
-
-backdrop-filter:
-
-blur(18px);
-
-
-
--webkit-backdrop-filter:
-
-blur(18px);
-
-
-
-padding:45px;
-
-
-
-border-radius:32px;
-
-
-
-border:
-
-
-1px solid rgba(
-
-255,
-
-255,
-
-255,
-
-0.05
-
-);
-
-
-
-max-width:700px;
-
-
-
-margin:auto;
-
-
-
-display:flex;
-
-
-
-flex-direction:column;
-
-
-
-align-items:center;
-
-
-
-gap:24px;
-
-
-
-transition:0.35s;
-
-
-
-box-shadow:
-
-
-
-0 0 24px rgba(
-
-255,
-
-107,
-
-53,
-
-0.04
-
-);
-
+    box-sizing: border-box;
 }
 
+/* =========================================
+   MAIN PANEL
+========================================= */
 
+.game-menu-page .panel {
+    width: 100%;
+    max-width: 700px;
 
-.panel:hover{
+    margin: auto;
+    padding: 30px 40px;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-background:
+    gap: 20px;
 
+    background: rgba(17, 24, 39, 0.16);
 
-rgba(
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-17,
+    border-radius: 32px;
 
-24,
+    border: 1px solid rgba(255, 255, 255, 0.05);
 
-39,
+    box-shadow:
+        0 0 24px rgba(255, 107, 53, 0.04);
 
-0.28
+    transition:
+        background 0.35s ease,
+        box-shadow 0.35s ease;
 
-);
-
-
-
-box-shadow:
-
-
-
-0 0 18px rgba(
-
-255,
-
-107,
-
-53,
-
-0.08
-
-),
-
-
-
-0 0 32px rgba(
-
-56,
-
-189,
-
-248,
-
-0.04
-
-);
-
+    box-sizing: border-box;
 }
 
-.menu-image{
+.game-menu-page .panel:hover {
+    background: rgba(17, 24, 39, 0.28);
 
-
-width:220px;
-
-
-height:300px;
-
-
-object-fit:cover;
-
-
-
-padding:5px;
-
-
-
-border-radius:22px;
-
-
-
-background:
-
-
-rgba(
-
-255,
-
-255,
-
-255,
-
-0.02
-
-);
-
-
-
-border:
-
-
-1px solid rgba(
-
-255,
-
-255,
-
-255,
-
-0.03
-
-);
-
+    box-shadow:
+        0 0 18px rgba(255, 107, 53, 0.08),
+        0 0 32px rgba(56, 189, 248, 0.04);
 }
 
-.badges{
+/* =========================================
+   BACK TO LOBBY
+========================================= */
 
+.menu-header {
+    width: 100%;
 
-display:flex;
-
-
-gap:16px;
-
-
-flex-wrap:wrap;
-
-
-justify-content:center;
-
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
+.back-to-lobby {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
+    gap: 9px;
 
-.badges span{
+    padding: 10px 16px;
 
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    border-radius: 12px;
 
-padding:12px 22px;
+    background: rgba(17, 24, 39, 0.75);
 
+    color: #e2e8f0;
 
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
 
-border-radius:30px;
+    cursor: pointer;
 
-
-
-background:
-
-
-rgba(
-
-255,
-
-255,
-
-255,
-
-0.08
-
-);
-
-
-
-backdrop-filter:
-
-blur(10px);
-
-
-
-border:
-
-
-1px solid rgba(
-
-255,
-
-255,
-
-255,
-
-0.04
-
-);
-
-
-
-color:#ffffff;
-
-
-
-font-size:15px;
-
-
-
-font-weight:600;
-
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-.menu-buttons{
+.back-arrow {
+    font-size: 19px;
+    line-height: 1;
 
-    display:contents;
+    color: #f97316;
 
-    align-items:center;
-
-    gap:15px;
-
-    margin-top:20px;
-
+    transition: transform 0.25s ease;
 }
 
+.back-to-lobby:hover {
+    background: rgba(249, 115, 22, 0.12);
 
-@media(max-width:768px){
+    border-color: #f97316;
 
+    color: white;
 
-.panel{
-
-padding:28px;
-
+    box-shadow:
+        0 0 14px rgba(249, 115, 22, 0.15);
 }
 
-
-.menu-image{
-
-
-width:180px;
-
-
-height:250px;
-
+.back-to-lobby:hover .back-arrow {
+    transform: translateX(-4px);
 }
 
-
-.badges{
-
-
-flex-direction:column;
-
+.back-to-lobby:active {
+    transform: scale(0.97);
 }
 
+.back-to-lobby:focus-visible {
+    outline: 2px solid #f97316;
+    outline-offset: 4px;
+}
+
+/* =========================================
+   GAME IMAGE
+========================================= */
+
+.game-menu-page .menu-image {
+    width: 220px;
+    height: 300px;
+
+    object-fit: cover;
+
+    padding: 5px;
+
+    border-radius: 22px;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* =========================================
+   GAME TITLE AND DESCRIPTION
+========================================= */
+
+.game-menu-page .page-title {
+    margin: 0;
+
+    font-size: clamp(26px, 4vw, 42px);
+
+    text-align: center;
+}
+
+.game-menu-page .subtitle {
+    max-width: 550px;
+
+    margin: 0;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* =========================================
+   GAME BADGES
+========================================= */
+
+.game-menu-page .badges {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.game-menu-page .badges span {
+    padding: 12px 22px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.04);
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* =========================================
+   CREATE / JOIN BUTTONS
+========================================= */
+
+.game-menu-page .menu-buttons {
+    width: min(100%, 365px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 14px;
+
+    margin-top: 4px;
+}
+
+.game-menu-page .menu-buttons > * {
+    width: 100%;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 768px) {
+    .page.game-menu-page {
+        padding: 14px 20px 30px;
+    }
+
+    .game-menu-page .panel {
+        padding: 24px;
+        gap: 17px;
+
+        border-radius: 26px;
+    }
+
+    .game-menu-page .menu-image {
+        width: 180px;
+        height: 250px;
+    }
+
+    .game-menu-page .badges {
+        gap: 10px;
+    }
+
+    .game-menu-page .badges span {
+        padding: 10px 17px;
+        font-size: 13px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+    .page.game-menu-page {
+        padding: 10px 12px 24px;
+    }
+
+    .game-menu-page .panel {
+        padding: 18px 15px;
+        gap: 15px;
+
+        border-radius: 22px;
+    }
+
+    .back-to-lobby {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+
+    .game-menu-page .menu-image {
+        width: 160px;
+        height: 220px;
+    }
+
+    .game-menu-page .page-title {
+        font-size: 27px;
+    }
+
+    .game-menu-page .subtitle {
+        font-size: 13px;
+    }
+
+    .game-menu-page .badges {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .game-menu-page .badges span {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .game-menu-page .menu-buttons {
+        gap: 11px;
+    }
 }

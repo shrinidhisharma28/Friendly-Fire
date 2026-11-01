@@ -1300,6 +1300,74 @@
 }
 
 
+/* =========================================
+   RPS GAME HEADER AND PAGE SPACING
+========================================= */
+
+.rps-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    box-sizing: border-box;
+}
+
+.rps-container {
+    width: min(1250px, 100%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+}
+
+/* Keep the shared game title compact */
+.rps-container .game-info {
+    width: 100%;
+    gap: 8px;
+}
+
+/* Keep controls visible and aligned */
+.rps-container .controls {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+    .rps-page {
+        padding: 12px;
+    }
+
+    .rps-container {
+        gap: 14px;
+    }
+
+    .rps-container .game-title-container {
+        height: 48px;
+        min-height: 48px;
+    }
+
+    .rps-container .game-info .game-title {
+        font-size: clamp(20px, 5.5vw, 30px);
+    }
+
+    .rps-container .controls {
+        margin-top: 4px;
+    }
+}
+
+
+
 
 /* ==========================================
    SMALL MOBILE
@@ -1339,5 +1407,201 @@
 
     }
 
+}
+
+
+
+/* =========================================
+   COMPACT SINGLE-CONTAINER SCOREBOARD
+========================================= */
+
+.rps-container .score-board {
+    width: min(650px, 100%);
+    min-width: 0;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+    align-items: center;
+    gap: 8px;
+
+    padding: 14px 18px;
+
+    border-radius: 18px;
+
+    background: rgba(17, 24, 39, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual player sections */
+.rps-container .score-board .player-score {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 6px;
+
+    border: none;
+    border-radius: 0;
+
+    background: transparent;
+    box-shadow: none;
+
+    transition: none;
+}
+
+.rps-container .score-board .player-score:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Player names */
+.rps-container .score-board .player-score h2 {
+    min-width: 0;
+    max-width: 100%;
+
+    margin: 0;
+
+    color: #E2E8F0;
+
+    font-size: clamp(11px, 1.5vw, 16px);
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Scores */
+.rps-container .score-board .score {
+    flex-shrink: 0;
+
+    margin: 0;
+
+    color: #FFB347;
+
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800;
+
+    line-height: 1;
+
+    text-shadow: 0 0 10px rgba(255, 179, 71, 0.25);
+}
+
+/* Round section */
+.rps-container .score-board .round-info {
+    min-width: 68px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    padding: 7px 12px;
+
+    border-radius: 12px;
+
+    background: rgba(249, 115, 22, 0.09);
+    border: 1px solid rgba(249, 115, 22, 0.18);
+}
+
+.rps-container .score-board .round-info h1 {
+    margin: 0;
+
+    color: #F97316;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.rps-container .score-board .round-info span {
+    margin: 0;
+
+    color: #E2E8F0;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================================
+   MOBILE SCOREBOARD
+========================================= */
+
+@media (max-width: 768px) {
+    .rps-container .score-board {
+        width: 100%;
+
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+
+        gap: 4px;
+        padding: 10px 8px;
+
+        border-radius: 15px;
+    }
+
+    .rps-container .score-board .player-score {
+        gap: 5px;
+        padding: 4px 2px;
+    }
+
+    .rps-container .score-board .player-score h2 {
+        font-size: 12px;
+    }
+
+    .rps-container .score-board .score {
+        font-size: 21px;
+    }
+
+    .rps-container .score-board .round-info {
+        min-width: 58px;
+        padding: 6px 8px;
+    }
+
+    .rps-container .score-board .round-info h1 {
+        font-size: 10px;
+    }
+
+    .rps-container .score-board .round-info span {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .rps-container .score-board {
+        gap: 2px;
+        padding: 9px 5px;
+    }
+
+    .rps-container .score-board .player-score {
+        gap: 4px;
+    }
+
+    .rps-container .score-board .player-score h2 {
+        font-size: 10px;
+    }
+
+    .rps-container .score-board .score {
+        font-size: 19px;
+    }
+
+    .rps-container .score-board .round-info {
+        min-width: 52px;
+        padding: 5px;
+    }
 }
 

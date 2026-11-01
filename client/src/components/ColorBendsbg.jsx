@@ -4,7 +4,7 @@ import ColorBends from './ColorBends';
 
 export default function ColorBendsBg({
     speed = 0.4,
-    intensity = 1.5,
+    intensity = 1.0,
     colors = ["#F97316"],
     noise = 0
 }) {
