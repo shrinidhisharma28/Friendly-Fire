@@ -20,11 +20,53 @@ import './RockPaperScissors.css';
 function RockPaperScissorsPage() {
     const { roomId } = useParams();
 
-    const { room, leaveRoom } = useGameSocket(roomId);
+    const {
+        room,
+        leaveRoom,
+        opponentLeft,
+        opponentLeftMessage
+    } = useGameSocket(roomId);
 
     const [selectedMove, setSelectedMove] = useState(null);
 
-    if (!room || !room.gameState || !socket.id) {
+    if (!room) {
+        return <Loading />;
+    }
+
+    // Do not show an infinite loading screen after the opponent leaves.
+    if (opponentLeft) {
+        return (
+            <div className="rps-page">
+                <div className="rps-container">
+                    <div
+                        role="alert"
+                        style={{
+                            padding: '16px 20px',
+                            marginBottom: '20px',
+                            border: '1px solid #b45309',
+                            borderRadius: '10px',
+                            background: 'rgba(180, 83, 9, 0.15)',
+                            color: '#fcd34d',
+                            textAlign: 'center',
+                            fontWeight: 700
+                        }}
+                    >
+                        {opponentLeftMessage}
+                    </div>
+
+                    <GameControls
+                        canRestart={false}
+                        canRestartGame={false}
+                        showRestart={false}
+                        onRestart={() => {}}
+                        onLeave={leaveRoom}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    if (!room.gameState || !socket.id) {
         return <Loading />;
     }
 
@@ -38,7 +80,6 @@ function RockPaperScissorsPage() {
     const game = room.gameState;
     const myId = socket.id;
 
-    // Keep the same player order on both clients.
     const player1 = room.players[0];
     const player2 = room.players[1];
 
@@ -155,8 +196,6 @@ function RockPaperScissorsPage() {
                     </div>
                 )}
 
-                {/* Leave is always available.
-                    Restart is shown only after game over. */}
                 <GameControls
                     canRestart={isHost}
                     canRestartGame={canRestartGame}

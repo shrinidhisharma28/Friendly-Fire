@@ -9,7 +9,6 @@ import './WaitingRoomPage.css';
 import Button from '../components/Button';
 import Loading from '../components/Loading';
 
-
 function WaitingRoomPage() {
     const { roomId } = useParams();
     const navigate = useNavigate();
@@ -19,6 +18,10 @@ function WaitingRoomPage() {
     useEffect(() => {
         function handleRoomData(data) {
             setRoom(data);
+
+            if (data.status === 'playing') {
+                navigate(`/game/${data.game}/play/${data.id}`);
+            }
         }
 
         function handleRoomUpdated(updated) {
@@ -41,6 +44,7 @@ function WaitingRoomPage() {
 
         socket.on('room-data', handleRoomData);
         socket.on('room-updated', handleRoomUpdated);
+        socket.on('game-updated', handleRoomUpdated);
         socket.on('room-not-found', handleRoomNotFound);
         socket.on('left-room', handleLeftRoom);
 
@@ -49,6 +53,7 @@ function WaitingRoomPage() {
         return () => {
             socket.off('room-data', handleRoomData);
             socket.off('room-updated', handleRoomUpdated);
+            socket.off('game-updated', handleRoomUpdated);
             socket.off('room-not-found', handleRoomNotFound);
             socket.off('left-room', handleLeftRoom);
         };
@@ -79,77 +84,75 @@ function WaitingRoomPage() {
     }
 
     return (
-        <>
-            <div className="waiting-room">
-                <div className="room-card">
-                    <div className="room-header">
-                        <div>
-                            <h1 className="room-title">
-                                Room {room.id}
-                            </h1>
+        <div className="waiting-room">
+            <div className="room-card">
+                <div className="room-header">
+                    <div>
+                        <h1 className="room-title">
+                            Room {room.id}
+                        </h1>
 
-                            <p className="room-game">
-                                {gameName}
-                            </p>
-                        </div>
-
-                        <Button
-                            variant="secondary"
-                            onClick={copyRoomCode}
-                        >
-                            Copy Code
-                        </Button>
-                    </div>
-
-                    <div className="status">
-                        <h3>Status</h3>
-
-                        <span className={`badge ${room.status}`}>
-                            {room.status.toUpperCase()}
-                        </span>
-                    </div>
-
-                    <div className="capacity">
-                        <h3>Capacity</h3>
-                        <p>
-                            {room.players.length}/{room.roomCapacity}
+                        <p className="room-game">
+                            {gameName}
                         </p>
                     </div>
 
-                    <div className="players">
-                        <h3>Players</h3>
+                    <Button
+                        variant="secondary"
+                        onClick={copyRoomCode}
+                    >
+                        Copy Code
+                    </Button>
+                </div>
 
-                        {room.players.map(player => (
-                            <div
-                                key={player.socketId}
-                                className="player"
-                            >
-                                <span>{player.username}</span>
+                <div className="status">
+                    <h3>Status</h3>
 
-                                {player.socketId === room.hostId && (
-                                    <span>👑</span>
-                                )}
-                            </div>
-                        ))}
-                    </div>
+                    <span className={`badge ${room.status}`}>
+                        {room.status.toUpperCase()}
+                    </span>
+                </div>
 
-                    <div className="buttons">
-                        {isHost && room.status === 'ready' && (
-                            <Button onClick={startGame}>
-                                Start Game
-                            </Button>
-                        )}
+                <div className="capacity">
+                    <h3>Capacity</h3>
+                    <p>
+                        {room.players.length}/{room.roomCapacity}
+                    </p>
+                </div>
 
-                        <Button
-                            variant="danger"
-                            onClick={leaveRoom}
+                <div className="players">
+                    <h3>Players</h3>
+
+                    {room.players.map(player => (
+                        <div
+                            key={player.socketId}
+                            className="player"
                         >
-                            Leave Room
+                            <span>{player.username}</span>
+
+                            {player.socketId === room.hostId && (
+                                <span>👑</span>
+                            )}
+                        </div>
+                    ))}
+                </div>
+
+                <div className="buttons">
+                    {isHost && room.status === 'ready' && (
+                        <Button onClick={startGame}>
+                            Start Game
                         </Button>
-                    </div>
+                    )}
+
+                    <Button
+                        variant="danger"
+                        onClick={leaveRoom}
+                    >
+                        Leave Room
+                    </Button>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

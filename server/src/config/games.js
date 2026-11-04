@@ -1,3 +1,4 @@
+
 module.exports = {
     tictactoe: {
         minPlayers: 2,
@@ -8,6 +9,7 @@ module.exports = {
         difficulty: "Easy",
         duration: "2 mins"
     },
+
     connect4: {
         minPlayers: 2,
         maxPlayers: 2,
@@ -17,13 +19,24 @@ module.exports = {
         difficulty: "Easy",
         duration: "5 mins"
     },
+
     rockpaperscissors: {
         minPlayers: 2,
         maxPlayers: 2,
         name: "Rock Paper Scissors",
         description: "Classic hand battle.",
-        details: "First player to reach 5 points wins.",
+        details: "Choose your hand, smash your oppenent.",
         difficulty: "Easy",
         duration: "3 mins"
+    },
+
+    wordle: {
+        minPlayers: 2,
+        maxPlayers: 2,
+        name: "Wordle Duel",
+        description: "Choose a secret word and solve your opponent's word.",
+        details:"Set a five-letter secret word. Solve it in fewer guesses to win.",
+        difficulty: "Medium",
+        duration: "5–10 mins"
     }
 };

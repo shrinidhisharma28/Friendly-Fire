@@ -54,6 +54,7 @@ function evaluateLifecycleRule(manager, ruleName, room, defaultMessage) {
         return { success: true };
     } catch (error) {
         console.error(`[gameService] ${ruleName} failed:`, error);
+
         return {
             success: false,
             message: "Unable to validate game operation"
@@ -226,6 +227,39 @@ function makeMove(room, socketId, payload) {
     }
 }
 
+// Return a game state intended only for the requesting player.
+function getPlayerState(room, socketId) {
+    const validation = validateRoom(room);
+
+    if (!validation.success) {
+        return null;
+    }
+
+    if (
+        typeof socketId !== "string" ||
+        !room.players.some(player => player.socketId === socketId)
+    ) {
+        return null;
+    }
+
+    const manager = getManager(room.game);
+
+    if (typeof manager.getPlayerState !== "function") {
+        return room.gameState;
+    }
+
+    try {
+        return manager.getPlayerState(room, socketId);
+    } catch (error) {
+        console.error(
+            `[gameService] getPlayerState failed for ${room.game}:`,
+            error
+        );
+
+        return null;
+    }
+}
+
 function runPlayerLifecycleHook(room, socketId, hookName) {
     const validation = validateRoom(room);
 
@@ -248,6 +282,7 @@ function runPlayerLifecycleHook(room, socketId, hookName) {
 
     try {
         manager[hookName](room, socketId);
+
         return { success: true };
     } catch (error) {
         console.error(
@@ -274,6 +309,7 @@ module.exports = {
     getManager,
     initializeGame,
     makeMove,
+    getPlayerState,
     canStartGame,
     canRestartGame,
     onPlayerJoin,

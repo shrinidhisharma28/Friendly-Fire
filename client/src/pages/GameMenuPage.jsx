@@ -10,7 +10,6 @@ import './GameMenuPage.css';
 
 import Button from '../components/Button';
 import Navbar from '../components/Navbar';
-import ColorBends from '../components/ColorBends';
 
 function GameMenuPage() {
     const { gameId } = useParams();
@@ -63,7 +62,6 @@ function GameMenuPage() {
 
     return (
         <>
-            <ColorBends colors={['#F97316']} />
 
             <Navbar />
 
